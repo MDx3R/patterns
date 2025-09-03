@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <include/domain/entity/grade.h>
+#include <domain/entity/grade.h>
 
 struct GradeEnrollmentCommand
 {

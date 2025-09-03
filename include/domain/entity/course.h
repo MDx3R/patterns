@@ -28,4 +28,5 @@ public:
 
     void addEnrollment(const Enrollment &enrollment);
     void gradeEnrollment(int enrollmentId, Grade &grade);
+    void clearEnrollments();
 };

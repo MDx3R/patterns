@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
-#include "include/application/repositories/enrollment_repository.h"
+#include "application/repositories/enrollment_repository.h"
 
 class InMemoryEnrollmentRepository : public IEnrollmentRepository
 {

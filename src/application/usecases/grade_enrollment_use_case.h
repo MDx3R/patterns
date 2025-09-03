@@ -1,5 +1,5 @@
-#include "include/application/usecases/grade_enrollment_use_case.h"
-#include "include/application/repositories/course_repository.h"
+#include "application/usecases/grade_enrollment_use_case.h"
+#include "application/repositories/course_repository.h"
 
 class GradeEnrollmentUseCase : public IGradeEnrollmentUseCase
 {

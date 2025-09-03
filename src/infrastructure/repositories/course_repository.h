@@ -1,6 +1,6 @@
 #include <unordered_map>
-#include "include/application/repositories/course_repository.h"
-#include "include/application/repositories/enrollment_repository.h"
+#include "application/repositories/course_repository.h"
+#include "application/repositories/enrollment_repository.h"
 #include <stdexcept>
 
 class InMemoryCourseRepository : public ICourseRepository
@@ -15,11 +15,14 @@ public:
 
     void save(const Course &course) override
     {
+        Course c = course;
+        c.clearEnrollments();
+
         for (const auto &enrollment : course.getEnrollments())
         {
             enrollmentRepo.save(enrollment); // upsert
         }
-        storage[course.getId()] = course; // upsert
+        storage[course.getId()] = c; // upsert
     }
 
     Course getById(int id) const override

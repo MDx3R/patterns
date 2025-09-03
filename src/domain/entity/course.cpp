@@ -58,3 +58,8 @@ void Course::gradeEnrollment(int enrollmentId, Grade &grade)
         }
     }
 }
+
+void Course::clearEnrollments()
+{
+    enrollments.clear();
+}

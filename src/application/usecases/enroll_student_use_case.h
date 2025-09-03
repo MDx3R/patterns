@@ -1,6 +1,6 @@
-#include "include/application/usecases/enroll_student_use_case.h"
-#include "include/application/repositories/course_repository.h"
-#include "include/domain/services/id_generator.h"
+#include "application/usecases/enroll_student_use_case.h"
+#include "application/repositories/course_repository.h"
+#include "domain/services/id_generator.h"
 
 class EnrollStudentUseCase : public IEnrollStudentUseCase
 {
