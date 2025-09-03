@@ -15,14 +15,14 @@ public:
 private:
     int grade_id;
     int teacher_id;
-    std::string value;
+    GradeEnum value;
     std::time_t date;
 
 public:
-    Grade(int id, const std::string &value, std::time_t date, int teacherId);
+    Grade(int id, GradeEnum value, std::time_t date, int teacherId);
 
     int getId() const;
     int getTeacherId() const;
-    std::string getValue() const;
+    GradeEnum getValue() const;
     std::time_t getDate() const;
 };

@@ -1,6 +1,6 @@
 #include "grade.h"
 
-Grade::Grade(int id, const std::string &value, std::time_t date, int teacherId)
+Grade::Grade(int id, Grade::GradeEnum value, std::time_t date, int teacherId)
     : grade_id(id), value(value), date(date), teacher_id(teacherId) {}
 
 int Grade::getId() const
@@ -13,7 +13,7 @@ int Grade::getTeacherId() const
     return teacher_id;
 }
 
-std::string Grade::getValue() const
+Grade::GradeEnum Grade::getValue() const
 {
     return value;
 }
