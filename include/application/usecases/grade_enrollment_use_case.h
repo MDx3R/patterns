@@ -6,7 +6,7 @@ struct GradeEnrollmentCommand
     int courseId;
     int enrollmentId;
     int teacherId;
-    domain::Grade::GradeEnum gradeValue;
+    Grade::GradeEnum gradeValue;
 };
 
 class IGradeEnrollmentUseCase

@@ -18,12 +18,12 @@ int Enrollment::getCourseId() const
     return course_id;
 }
 
-const domain::Grade *Enrollment::getGrade() const
+const Grade *Enrollment::getGrade() const
 {
     return grade ? &(*grade) : nullptr;
 }
 
-void Enrollment::setGrade(std::optional<domain::Grade> newGrade)
+void Enrollment::setGrade(std::optional<Grade> newGrade)
 {
     grade = std::move(newGrade);
 }

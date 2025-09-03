@@ -47,7 +47,7 @@ void Course::addEnrollment(const Enrollment &enrollment)
     enrollments.push_back(enrollment);
 }
 
-void Course::gradeEnrollment(int enrollmentId, domain::Grade &grade)
+void Course::gradeEnrollment(int enrollmentId, Grade &grade)
 {
     for (auto &enrollment : enrollments)
     {

@@ -1,24 +1,24 @@
 #include "domain/entity/grade.h"
 
-domain::Grade::Grade(int id, domain::Grade::GradeEnum value, std::time_t date, int teacherId)
+Grade::Grade(int id, Grade::GradeEnum value, std::time_t date, int teacherId)
     : grade_id(id), value(value), date(date), teacher_id(teacherId) {}
 
-int domain::Grade::getId() const
+int Grade::getId() const
 {
     return grade_id;
 }
 
-int domain::Grade::getTeacherId() const
+int Grade::getTeacherId() const
 {
     return teacher_id;
 }
 
-domain::Grade::GradeEnum domain::Grade::getValue() const
+Grade::GradeEnum Grade::getValue() const
 {
     return value;
 }
 
-std::time_t domain::Grade::getDate() const
+std::time_t Grade::getDate() const
 {
     return date;
 }
