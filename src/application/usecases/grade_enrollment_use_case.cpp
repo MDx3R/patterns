@@ -1,4 +1,4 @@
-#include "grade_enrollment_use_case.h"
+#include "grade_enrollment_use_case_impl.h"
 
 GradeEnrollmentUseCase::GradeEnrollmentUseCase(ICourseRepository &repo)
     : courseRepository(repo) {}

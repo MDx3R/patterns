@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <domain/entity/grade.h>
 

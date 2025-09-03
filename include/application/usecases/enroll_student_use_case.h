@@ -1,3 +1,4 @@
+#pragma once
 struct EnrollStudentCommand
 {
     int courseId;

@@ -1,4 +1,4 @@
-#include "create_course_use_case.h"
+#include "create_course_use_case_impl.h"
 
 CreateCourseUseCase::CreateCourseUseCase(ICourseRepository &repo, IdGenerator &gen)
     : courseRepository(repo), idGenerator(gen) {}

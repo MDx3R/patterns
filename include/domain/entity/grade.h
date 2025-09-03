@@ -20,6 +20,7 @@ private:
     std::time_t date;
 
 public:
+    Grade() = default;
     Grade(int id, GradeEnum value, std::time_t date, int teacherId);
 
     int getId() const;

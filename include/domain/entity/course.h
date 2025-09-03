@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <vector>
 #include <optional>
@@ -13,6 +14,7 @@ private:
     std::vector<Enrollment> enrollments;
 
 public:
+    Course() = default;
     Course(int id, const std::string &title, const std::string &description, int teacherId);
     Course(int id, const std::string &title, const std::string &description,
            int teacherId, const std::vector<Enrollment> &enrollments);

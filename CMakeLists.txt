@@ -17,6 +17,10 @@ add_library(core
     src/domain/entity/teacher.cpp
 )
 
+target_include_directories(core PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
 target_include_directories(core PUBLIC include)
 
 add_executable(app

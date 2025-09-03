@@ -1,3 +1,4 @@
+#pragma once
 #include <memory>
 #include <optional>
 #include "domain/entity/grade.h"
@@ -11,6 +12,7 @@ private:
     std::optional<Grade> grade;
 
 public:
+    Enrollment() = default;
     Enrollment(int id, int studentId, int courseId);
 
     int getId() const;

@@ -1,4 +1,4 @@
-#include "enroll_student_use_case.h"
+#include "enroll_student_use_case_impl.h"
 
 EnrollStudentUseCase::EnrollStudentUseCase(ICourseRepository &repo, IdGenerator &gen)
     : courseRepository(repo), idGenerator(gen) {}
