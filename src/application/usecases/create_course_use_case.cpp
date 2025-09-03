@@ -1,11 +1,11 @@
 #include "create_course_use_case.h"
 
-CreateCourseUseCase::CreateCourseUseCase(ICourseRepository &repo)
-    : courseRepository(repo) {}
+CreateCourseUseCase::CreateCourseUseCase(ICourseRepository &repo, IdGenerator &gen)
+    : courseRepository(repo), idGenerator(gen) {}
 
 int CreateCourseUseCase::execute(const CreateCourseCommand &request)
 {
-    Course course(0, request.title, request.description, request.teacherId);
-    int id = courseRepository.save(course);
-    return id;
+    Course course(idGenerator.getNext(), request.title, request.description, request.teacherId);
+    courseRepository.save(course);
+    return course.getId();
 }

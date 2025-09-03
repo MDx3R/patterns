@@ -1,12 +1,13 @@
 #include "enroll_student_use_case.h"
 
-EnrollStudentUseCase::EnrollStudentUseCase(ICourseRepository &repo)
-    : courseRepository(repo) {}
+EnrollStudentUseCase::EnrollStudentUseCase(ICourseRepository &repo, IdGenerator &gen)
+    : courseRepository(repo), idGenerator(gen) {}
 
 int EnrollStudentUseCase::execute(const EnrollStudentCommand &request)
 {
     Course course = courseRepository.getById(request.courseId);
-    course.addEnrollment(Enrollment(0, request.studentId, course.getId()));
+    Enrollment enrollement(idGenerator.getNext(), request.studentId, course.getId());
+    course.addEnrollment(enrollement);
     courseRepository.save(course);
-    return 0; // TODO: EnrollmentID
+    return enrollement.getId();
 }
