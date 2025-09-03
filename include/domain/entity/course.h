@@ -27,5 +27,5 @@ public:
     void setDescription(const std::string &newDescription);
 
     void addEnrollment(const Enrollment &enrollment);
-    void gradeEnrollment(int enrollmentId, std::unique_ptr<Grade> grade);
+    void gradeEnrollment(int enrollmentId, Grade &grade);
 };
