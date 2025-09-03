@@ -1,4 +1,4 @@
-#include "teacher.h"
+#include "domain/entity/teacher.h"
 
 Teacher::Teacher(int id, const std::string &name)
     : teacher_id(id), name(name) {}

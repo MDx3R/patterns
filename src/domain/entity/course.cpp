@@ -1,4 +1,4 @@
-#include "course.h"
+#include "domain/entity/course.h"
 
 Course::Course(int id, const std::string &title, const std::string &description, int teacherId)
     : course_id(id), teacher_id(teacherId), title(title), description(description) {}
@@ -47,7 +47,7 @@ void Course::addEnrollment(const Enrollment &enrollment)
     enrollments.push_back(enrollment);
 }
 
-void Course::gradeEnrollment(int enrollmentId, Grade &grade)
+void Course::gradeEnrollment(int enrollmentId, domain::Grade &grade)
 {
     for (auto &enrollment : enrollments)
     {

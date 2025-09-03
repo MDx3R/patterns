@@ -7,5 +7,6 @@ void GradeEnrollmentUseCase::execute(const GradeEnrollmentCommand &request)
 {
     std::time_t now = std::time(nullptr);
     Course course = courseRepository.getById(request.courseId);
-    course.gradeEnrollment(request.enrollmentId, Grade(0, request.gradeValue, now, request.teacherId));
+    domain::Grade grade(0, request.gradeValue, now, request.teacherId);
+    course.gradeEnrollment(request.enrollmentId, grade);
 }

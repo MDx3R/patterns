@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
 #include <optional>
-#include "enrollment.h"
+#include "domain/entity/enrollment.h"
 
 class Course
 {
@@ -27,6 +27,6 @@ public:
     void setDescription(const std::string &newDescription);
 
     void addEnrollment(const Enrollment &enrollment);
-    void gradeEnrollment(int enrollmentId, Grade &grade);
+    void gradeEnrollment(int enrollmentId, domain::Grade &grade);
     void clearEnrollments();
 };

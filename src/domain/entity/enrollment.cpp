@@ -1,4 +1,4 @@
-#include "enrollment.h"
+#include "domain/entity/enrollment.h"
 
 Enrollment::Enrollment(int id, int studentId, int courseId)
     : enrollment_id(id), student_id(studentId), course_id(courseId), grade(std::nullopt) {}
@@ -18,12 +18,12 @@ int Enrollment::getCourseId() const
     return course_id;
 }
 
-const Grade *Enrollment::getGrade() const
+const domain::Grade *Enrollment::getGrade() const
 {
     return grade ? &(*grade) : nullptr;
 }
 
-void Enrollment::setGrade(std::optional<Grade> newGrade)
+void Enrollment::setGrade(std::optional<domain::Grade> newGrade)
 {
     grade = std::move(newGrade);
 }

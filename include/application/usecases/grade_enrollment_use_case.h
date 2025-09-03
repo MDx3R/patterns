@@ -1,4 +1,3 @@
-#pragma once
 #include <string>
 #include <domain/entity/grade.h>
 
@@ -7,7 +6,7 @@ struct GradeEnrollmentCommand
     int courseId;
     int enrollmentId;
     int teacherId;
-    Grade::GradeEnum gradeValue;
+    domain::Grade::GradeEnum gradeValue;
 };
 
 class IGradeEnrollmentUseCase

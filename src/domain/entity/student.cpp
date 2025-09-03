@@ -1,4 +1,4 @@
-#include "student.h"
+#include "domain/entity/student.h"
 
 Student::Student(int id, const std::string &name)
     : student_id(id), name(name) {}
