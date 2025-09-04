@@ -27,4 +27,12 @@ public:
     int getTeacherId() const;
     GradeEnum getValue() const;
     std::time_t getDate() const;
+
+    bool operator==(const Grade &other) const
+    {
+        return grade_id == other.grade_id &&
+               teacher_id == other.teacher_id &&
+               value == other.value &&
+               date == other.date;
+    }
 };

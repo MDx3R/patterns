@@ -6,9 +6,9 @@ class EnrollStudentUseCase : public IEnrollStudentUseCase
 {
 private:
     ICourseRepository &courseRepository;
-    IdGenerator &idGenerator;
+    IIdGenerator &idGenerator;
 
 public:
-    explicit EnrollStudentUseCase(ICourseRepository &repo, IdGenerator &gen);
+    explicit EnrollStudentUseCase(ICourseRepository &repo, IIdGenerator &gen);
     int execute(const EnrollStudentCommand &request) override;
 };

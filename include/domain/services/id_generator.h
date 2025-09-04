@@ -1,9 +1,14 @@
 #pragma once
-class IdGenerator
+struct IIdGenerator
+{
+    virtual int getNext() = 0;
+};
+
+class IdGenerator : public IIdGenerator
 {
 private:
-    static inline int nextId = 1;
+    int nextId = 1;
 
 public:
-    static int getNext() { return nextId++; }
+    int getNext() override { return nextId++; }
 };

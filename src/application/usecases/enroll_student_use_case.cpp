@@ -1,6 +1,6 @@
 #include "enroll_student_use_case_impl.h"
 
-EnrollStudentUseCase::EnrollStudentUseCase(ICourseRepository &repo, IdGenerator &gen)
+EnrollStudentUseCase::EnrollStudentUseCase(ICourseRepository &repo, IIdGenerator &gen)
     : courseRepository(repo), idGenerator(gen) {}
 
 int EnrollStudentUseCase::execute(const EnrollStudentCommand &request)

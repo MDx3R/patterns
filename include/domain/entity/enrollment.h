@@ -21,4 +21,12 @@ public:
     const Grade *getGrade() const;
 
     void setGrade(std::optional<Grade> newGrade);
+
+    bool operator==(const Enrollment &other) const
+    {
+        return enrollment_id == other.enrollment_id &&
+               student_id == other.student_id &&
+               course_id == other.course_id &&
+               grade == other.grade;
+    }
 };

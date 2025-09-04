@@ -6,25 +6,13 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_library(core
-    src/application/usecases/create_course_use_case.cpp
-    src/application/usecases/enroll_student_use_case.cpp
-    src/application/usecases/grade_enrollment_use_case.cpp
-    src/domain/entity/course.cpp
-    src/domain/entity/enrollment.cpp
-    src/domain/entity/grade.cpp
-    src/domain/entity/student.cpp
-    src/domain/entity/teacher.cpp
-)
+option(BUILD_TESTING "Build unit tests" ON)
 
-target_include_directories(core PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
-)
+add_subdirectory(src)
+add_subdirectory(app)
 
-target_include_directories(core PUBLIC include)
-
-add_executable(app
-    app/main.cpp
-)
-
-target_link_libraries(app PRIVATE core)
+if(BUILD_TESTING)
+    enable_testing()
+    add_subdirectory(external/googletest)
+    add_subdirectory(tests)
+endif()

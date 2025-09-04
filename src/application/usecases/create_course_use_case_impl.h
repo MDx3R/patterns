@@ -6,9 +6,9 @@ class CreateCourseUseCase : public ICreateCourseUseCase
 {
 private:
     ICourseRepository &courseRepository;
-    IdGenerator &idGenerator;
+    IIdGenerator &idGenerator;
 
 public:
-    explicit CreateCourseUseCase(ICourseRepository &repo, IdGenerator &gen);
+    explicit CreateCourseUseCase(ICourseRepository &repo, IIdGenerator &gen);
     int execute(const CreateCourseCommand &request) override;
 };
