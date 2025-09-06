@@ -1,5 +1,6 @@
 add_executable(unit_tests
     use_case_tests.cpp
+    repository_tests.cpp
     functional_tests.cpp
 )
 
