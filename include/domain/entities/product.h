@@ -14,8 +14,13 @@ protected:
 public:
     Product(int id, const std::string &name, double price, int quantity);
     virtual ~Product() = default;
+
+    int getId() const;
+    std::string getName() const;
     double getPrice() const;
     double getQuantity() const;
+
+    virtual std::string toString() = 0;
 
     bool operator==(const Product &other) const
     {

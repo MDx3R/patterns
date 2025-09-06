@@ -8,6 +8,7 @@ protected:
 
 public:
     Toy(int id, const std::string &name, double price, int quantity, int ageLimit);
+
     int getAgeLimit() const;
 
     bool operator==(const Toy &other) const
