@@ -1,11 +1,11 @@
 #include "domain/entity/teacher.h"
 
 Teacher::Teacher(int id, const std::string &name)
-    : teacher_id(id), name(name) {}
+    : teacherId(id), name(name) {}
 
 int Teacher::getId() const
 {
-    return teacher_id;
+    return teacherId;
 }
 
 std::string Teacher::getName() const

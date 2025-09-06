@@ -6,9 +6,9 @@
 class Enrollment
 {
 private:
-    int enrollment_id;
-    int student_id;
-    int course_id;
+    int enrollmentId;
+    int studentId;
+    int courseId;
     std::optional<Grade> grade;
 
 public:
@@ -24,9 +24,9 @@ public:
 
     bool operator==(const Enrollment &other) const
     {
-        return enrollment_id == other.enrollment_id &&
-               student_id == other.student_id &&
-               course_id == other.course_id &&
+        return enrollmentId == other.enrollmentId &&
+               studentId == other.studentId &&
+               courseId == other.courseId &&
                grade == other.grade;
     }
 };

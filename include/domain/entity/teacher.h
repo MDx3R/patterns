@@ -4,7 +4,7 @@
 class Teacher
 {
 private:
-    int teacher_id;
+    int teacherId;
     std::string name;
 
 public:

@@ -4,7 +4,7 @@
 class Student
 {
 private:
-    int student_id;
+    int studentId;
     std::string name;
 
 public:

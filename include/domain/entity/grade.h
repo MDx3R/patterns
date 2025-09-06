@@ -14,8 +14,8 @@ public:
     };
 
 private:
-    int grade_id;
-    int teacher_id;
+    int gradeId;
+    int teacherId;
     GradeEnum value;
     std::time_t date;
 
@@ -30,8 +30,8 @@ public:
 
     bool operator==(const Grade &other) const
     {
-        return grade_id == other.grade_id &&
-               teacher_id == other.teacher_id &&
+        return gradeId == other.gradeId &&
+               teacherId == other.teacherId &&
                value == other.value &&
                date == other.date;
     }

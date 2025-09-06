@@ -1,21 +1,21 @@
 #include "domain/entity/enrollment.h"
 
 Enrollment::Enrollment(int id, int studentId, int courseId)
-    : enrollment_id(id), student_id(studentId), course_id(courseId), grade(std::nullopt) {}
+    : enrollmentId(id), studentId(studentId), courseId(courseId), grade(std::nullopt) {}
 
 int Enrollment::getId() const
 {
-    return enrollment_id;
+    return enrollmentId;
 }
 
 int Enrollment::getStudentId() const
 {
-    return student_id;
+    return studentId;
 }
 
 int Enrollment::getCourseId() const
 {
-    return course_id;
+    return courseId;
 }
 
 const Grade *Enrollment::getGrade() const

@@ -9,5 +9,5 @@ class IEnrollStudentUseCase
 {
 public:
     virtual ~IEnrollStudentUseCase() = default;
-    virtual int execute(const EnrollStudentCommand &request) = 0; // returns enrollment_id
+    virtual int execute(const EnrollStudentCommand &request) = 0; // returns enrollmentId
 };

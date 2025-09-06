@@ -1,20 +1,20 @@
 #include "domain/entity/course.h"
 
 Course::Course(int id, const std::string &title, const std::string &description, int teacherId)
-    : course_id(id), teacher_id(teacherId), title(title), description(description) {}
+    : courseId(id), teacherId(teacherId), title(title), description(description) {}
 
 Course::Course(int id, const std::string &title, const std::string &description,
                int teacherId, const std::vector<Enrollment> &enrollments)
-    : course_id(id), teacher_id(teacherId), title(title), description(description), enrollments(enrollments) {}
+    : courseId(id), teacherId(teacherId), title(title), description(description), enrollments(enrollments) {}
 
 int Course::getId() const
 {
-    return course_id;
+    return courseId;
 }
 
 int Course::getTeacherId() const
 {
-    return teacher_id;
+    return teacherId;
 }
 
 std::string Course::getTitle() const

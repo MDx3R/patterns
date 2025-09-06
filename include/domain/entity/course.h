@@ -7,8 +7,8 @@
 class Course
 {
 private:
-    int course_id;
-    int teacher_id;
+    int courseId;
+    int teacherId;
     std::string title;
     std::string description;
     std::vector<Enrollment> enrollments;
@@ -34,10 +34,10 @@ public:
 
     bool operator==(const Course &other) const
     {
-        return course_id == other.course_id &&
+        return courseId == other.courseId &&
                title == other.title &&
                description == other.description &&
-               teacher_id == other.teacher_id &&
+               teacherId == other.teacherId &&
                enrollments == other.enrollments;
     }
 };

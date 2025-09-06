@@ -1,11 +1,11 @@
 #include "domain/entity/student.h"
 
 Student::Student(int id, const std::string &name)
-    : student_id(id), name(name) {}
+    : studentId(id), name(name) {}
 
 int Student::getId() const
 {
-    return student_id;
+    return studentId;
 }
 
 std::string Student::getName() const
