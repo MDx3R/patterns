@@ -1,5 +1,6 @@
 add_executable(unit_tests
     use_case_tests.cpp
+    functional_tests.cpp
 )
 
 target_link_libraries(unit_tests PRIVATE

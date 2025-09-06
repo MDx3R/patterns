@@ -5,16 +5,18 @@
 #include "application/usecases/create_course_use_case.h"
 #include "application/usecases/enroll_student_use_case.h"
 #include "application/usecases/grade_enrollment_use_case.h"
+#include "application/usecases/get_course_use_case.h"
 
 class Dispatcher
 {
 public:
     Dispatcher(ICreateCourseUseCase &createCourseUC,
                IEnrollStudentUseCase &enrollStudentUC,
-               IGradeEnrollmentUseCase &gradeEnrollmentUC)
+               IGradeEnrollmentUseCase &gradeEnrollmentUC, IGetCourseUseCase &getCourseUC)
         : createCourseUseCase(createCourseUC),
           enrollStudentUseCase(enrollStudentUC),
-          gradeEnrollmentUseCase(gradeEnrollmentUC)
+          gradeEnrollmentUseCase(gradeEnrollmentUC),
+          getCourseUseCase(getCourseUC)
     {
     }
 
@@ -32,26 +34,33 @@ public:
             std::cin >> choice;
             std::cin.ignore();
 
-            switch (choice)
+            try
             {
-            case 1:
-                handleCreateCourse();
-                break;
-            case 2:
-                handleEnrollStudent();
-                break;
-            case 3:
-                handleGradeEnrollment();
-                break;
-            case 4:
-                std::cout << "Course viewing is not implemented yet.\n";
-                break;
-            case 5:
-                std::cout << "Exiting...\n";
-                running = false;
-                break;
-            default:
-                std::cout << "Invalid choice. Please try again.\n";
+                switch (choice)
+                {
+                case 1:
+                    handleCreateCourse();
+                    break;
+                case 2:
+                    handleEnrollStudent();
+                    break;
+                case 3:
+                    handleGradeEnrollment();
+                    break;
+                case 4:
+                    handleGetCourse();
+                    break;
+                case 5:
+                    std::cout << "Exiting...\n";
+                    running = false;
+                    break;
+                default:
+                    std::cout << "Invalid choice. Please try again.\n";
+                }
+            }
+            catch (const std::exception &e)
+            {
+                std::cout << "Error: " << e.what() << "\n";
             }
         }
     }
@@ -60,6 +69,7 @@ private:
     ICreateCourseUseCase &createCourseUseCase;
     IEnrollStudentUseCase &enrollStudentUseCase;
     IGradeEnrollmentUseCase &gradeEnrollmentUseCase;
+    IGetCourseUseCase &getCourseUseCase;
 
     void showMainMenu()
     {
@@ -115,5 +125,32 @@ private:
 
         gradeEnrollmentUseCase.execute(cmd);
         std::cout << "Grade successfully assigned.\n";
+    }
+
+    void handleGetCourse()
+    {
+        int courseId;
+        std::cout << "Enter course ID to view: ";
+        std::cin >> courseId;
+
+        auto courseDTO = getCourseUseCase.execute(courseId);
+
+        std::cout << "\nCourse ID: " << courseDTO.id << "\n";
+        std::cout << "Title: " << courseDTO.title << "\n";
+        std::cout << "Description: " << courseDTO.description << "\n";
+        std::cout << "Teacher ID: " << courseDTO.teacherId << "\n";
+        std::cout << "Enrollments:\n";
+
+        for (const auto &enrollment : courseDTO.enrollments)
+        {
+            std::cout << "  Enrollment ID: " << enrollment.id
+                      << ", Student ID: " << enrollment.studentId
+                      << ", Grade: ";
+            if (enrollment.grade)
+                std::cout << static_cast<int>(enrollment.grade->getValue());
+            else
+                std::cout << "N/A";
+            std::cout << "\n";
+        }
     }
 };
