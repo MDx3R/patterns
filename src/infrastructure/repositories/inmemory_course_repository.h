@@ -7,10 +7,10 @@ class InMemoryCourseRepository : public ICourseRepository
 {
 private:
     std::unordered_map<int, Course> storage;
-    IEnrollmentRepository &enrollmentRepo;
+    std::shared_ptr<IEnrollmentRepository> enrollmentRepo;
 
 public:
-    explicit InMemoryCourseRepository(IEnrollmentRepository &enrollRepo)
+    explicit InMemoryCourseRepository(std::shared_ptr<IEnrollmentRepository> enrollRepo)
         : enrollmentRepo(enrollRepo) {}
 
     void save(const Course &course) override
@@ -20,7 +20,7 @@ public:
 
         for (const auto &enrollment : course.getEnrollments())
         {
-            enrollmentRepo.save(enrollment); // upsert
+            enrollmentRepo->save(enrollment); // upsert
         }
         storage[course.getId()] = c; // upsert
     }
@@ -33,7 +33,7 @@ public:
 
         Course c = it->second;
 
-        auto enrollments = enrollmentRepo.byCourse(c.getId());
+        auto enrollments = enrollmentRepo->byCourse(c.getId());
         for (const auto &e : enrollments)
         {
             c.addEnrollment(e);

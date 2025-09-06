@@ -5,9 +5,9 @@
 class GetCourseUseCase : public IGetCourseUseCase
 {
 private:
-    ICourseRepository &courseRepository;
+    std::shared_ptr<ICourseRepository> courseRepository;
 
 public:
-    explicit GetCourseUseCase(ICourseRepository &repo);
+    explicit GetCourseUseCase(std::shared_ptr<ICourseRepository> repo);
     CourseDTO execute(int courseId) override;
 };

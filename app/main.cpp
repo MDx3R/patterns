@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 #include "domain/services/id_generator.h"
 #include "domain/services/clock.h"
@@ -13,18 +14,18 @@
 int main()
 {
     // Common
-    auto idGenerator = IdGenerator();
-    auto clock = SystemClock();
+    auto idGenerator = std::make_shared<IdGenerator>();
+    auto clock = std::make_shared<SystemClock>();
 
     // Создаём репозитории
-    auto enrollmentRepo = InMemoryEnrollmentRepository();
-    auto courseRepo = InMemoryCourseRepository(enrollmentRepo);
+    auto enrollmentRepo = std::make_shared<InMemoryEnrollmentRepository>();
+    auto courseRepo = std::make_shared<InMemoryCourseRepository>(enrollmentRepo);
 
     // Создаём use case
-    auto createCourseUC = CreateCourseUseCase(courseRepo, idGenerator);
-    auto enrollStudentUC = EnrollStudentUseCase(courseRepo, idGenerator);
-    auto gradeEnrollmentUC = GradeEnrollmentUseCase(courseRepo, clock);
-    auto getCourseUC = GetCourseUseCase(courseRepo);
+    auto createCourseUC = std::make_shared<CreateCourseUseCase>(courseRepo, idGenerator);
+    auto enrollStudentUC = std::make_shared<EnrollStudentUseCase>(courseRepo, idGenerator);
+    auto gradeEnrollmentUC = std::make_shared<GradeEnrollmentUseCase>(courseRepo, clock);
+    auto getCourseUC = std::make_shared<GetCourseUseCase>(courseRepo);
 
     // Создаём Dispatcher и запускаем
     Dispatcher dispatcher(createCourseUC, enrollStudentUC, gradeEnrollmentUC, getCourseUC);

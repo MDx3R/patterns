@@ -34,9 +34,16 @@ public:
 class UseCaseTest : public ::testing::Test
 {
 protected:
-    MockCourseRepository mockCourseRepo;
-    MockIdGenerator mockIdGen;
-    MockClock mockClock;
+    std::shared_ptr<MockCourseRepository> mockCourseRepo;
+    std::shared_ptr<MockIdGenerator> mockIdGen;
+    std::shared_ptr<MockClock> mockClock;
+
+    void SetUp() override
+    {
+        mockCourseRepo = std::make_shared<MockCourseRepository>();
+        mockIdGen = std::make_shared<MockIdGenerator>();
+        mockClock = std::make_shared<MockClock>();
+    }
 
     Course makeCourse(int id, const std::string &name, const std::string &desc, int teacherId)
     {
@@ -56,8 +63,8 @@ TEST_F(UseCaseTest, CreateCourseUseCase_Execute_CreatesAndSavesCourse)
     CreateCourseCommand command{1001, "Math 101", "Introduction to Mathematics"};
     Course expectedCourse = makeCourse(42, command.title, command.description, command.teacherId);
 
-    EXPECT_CALL(mockIdGen, getNext()).WillOnce(::testing::Return(42));
-    EXPECT_CALL(mockCourseRepo, save(::testing::Eq(expectedCourse)));
+    EXPECT_CALL(*mockIdGen, getNext()).WillOnce(::testing::Return(42));
+    EXPECT_CALL(*mockCourseRepo, save(::testing::Eq(expectedCourse)));
 
     // Act
     CreateCourseUseCase useCase(mockCourseRepo, mockIdGen);
@@ -78,9 +85,9 @@ TEST_F(UseCaseTest, EnrollStudentUseCase_Execute_EnrollsStudentAndSavesCourse)
     Course expectedCourse = course;
     expectedCourse.addEnrollment(enrollment);
 
-    EXPECT_CALL(mockCourseRepo, getById(101)).WillOnce(::testing::Return(course));
-    EXPECT_CALL(mockIdGen, getNext()).WillOnce(::testing::Return(5001));
-    EXPECT_CALL(mockCourseRepo, save(::testing::Eq(expectedCourse)));
+    EXPECT_CALL(*mockCourseRepo, getById(101)).WillOnce(::testing::Return(course));
+    EXPECT_CALL(*mockIdGen, getNext()).WillOnce(::testing::Return(5001));
+    EXPECT_CALL(*mockCourseRepo, save(::testing::Eq(expectedCourse)));
 
     // Act
     EnrollStudentUseCase useCase(mockCourseRepo, mockIdGen);
@@ -110,9 +117,9 @@ TEST_F(UseCaseTest, GradeEnrollment_GradesEnrollmentAndSavesCourse)
     Grade expectedGrade(0, cmd.gradeValue, fakeNow, cmd.teacherId);
     expectedCourse.gradeEnrollment(enrollmentId, expectedGrade);
 
-    EXPECT_CALL(mockClock, now()).WillOnce(::testing::Return(fakeNow));
-    EXPECT_CALL(mockCourseRepo, getById(courseId)).WillOnce(::testing::Return(course));
-    EXPECT_CALL(mockCourseRepo, save(::testing::Eq(expectedCourse)));
+    EXPECT_CALL(*mockClock, now()).WillOnce(::testing::Return(fakeNow));
+    EXPECT_CALL(*mockCourseRepo, getById(courseId)).WillOnce(::testing::Return(course));
+    EXPECT_CALL(*mockCourseRepo, save(::testing::Eq(expectedCourse)));
 
     // Act
     GradeEnrollmentUseCase useCase(mockCourseRepo, mockClock);

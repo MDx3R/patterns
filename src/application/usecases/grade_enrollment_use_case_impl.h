@@ -5,10 +5,10 @@
 class GradeEnrollmentUseCase : public IGradeEnrollmentUseCase
 {
 private:
-    ICourseRepository &courseRepository;
-    IClock &clock;
+    std::shared_ptr<ICourseRepository> courseRepository;
+    std::shared_ptr<IClock> clock;
 
 public:
-    explicit GradeEnrollmentUseCase(ICourseRepository &repo, IClock &clock);
+    explicit GradeEnrollmentUseCase(std::shared_ptr<ICourseRepository> repo, std::shared_ptr<IClock> clock);
     void execute(const GradeEnrollmentCommand &request) override;
 };

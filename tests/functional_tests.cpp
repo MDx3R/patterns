@@ -12,12 +12,18 @@
 class FunctionalTest : public ::testing::Test
 {
 protected:
-    IdGenerator idGenerator;
-    SystemClock clock;
-    InMemoryEnrollmentRepository enrollmentRepo;
-    InMemoryCourseRepository courseRepo;
+    std::shared_ptr<IdGenerator> idGenerator;
+    std::shared_ptr<SystemClock> clock;
+    std::shared_ptr<InMemoryEnrollmentRepository> enrollmentRepo;
+    std::shared_ptr<InMemoryCourseRepository> courseRepo;
 
-    FunctionalTest() : courseRepo(enrollmentRepo) {}
+    void SetUp() override
+    {
+        idGenerator = std::make_shared<IdGenerator>();
+        clock = std::make_shared<SystemClock>();
+        enrollmentRepo = std::make_shared<InMemoryEnrollmentRepository>();
+        courseRepo = std::make_shared<InMemoryCourseRepository>(enrollmentRepo);
+    }
 
     Course makeCourse(int id, const std::string &name, const std::string &desc, int teacherId)
     {
@@ -90,8 +96,7 @@ TEST_F(FunctionalTest, GradeEnrollmentUseCase_GradesEnrollmentAndSavesCourse)
     int courseId = createCourseUC.execute(courseCommand);
     EnrollStudentCommand enrollCommand{courseId, 2001};
     int enrollmentId = enrollStudentUC.execute(enrollCommand);
-    int gradeValue = static_cast<int>(Grade::GradeEnum::EXCELLENT);
-    GradeEnrollmentCommand gradeCommand{courseId, enrollmentId, gradeValue};
+    GradeEnrollmentCommand gradeCommand{courseId, enrollmentId, courseCommand.teacherId, Grade::GradeEnum::EXCELLENT};
 
     // Act
     gradeEnrollmentUC.execute(gradeCommand);
@@ -114,4 +119,65 @@ TEST_F(FunctionalTest, GradeEnrollmentUseCase_GradesEnrollmentAndSavesCourse)
         }
     }
     EXPECT_TRUE(gradeFound);
+}
+
+TEST_F(FunctionalTest, EnrollStudentUseCase_Execute_NoCourseThrows)
+{
+    // Arrange
+    EnrollStudentUseCase enrollStudentUC(courseRepo, idGenerator);
+    int courseId = 999;
+    EnrollStudentCommand enrollCommand{courseId, 2001};
+
+    // Act & Assert
+    EXPECT_THROW(
+        {
+            enrollStudentUC.execute(enrollCommand);
+        },
+        std::runtime_error);
+}
+
+TEST_F(FunctionalTest, GradeEnrollmentUseCase_Execute_NoCourseThrows)
+{
+    // Arrange
+    GradeEnrollmentUseCase gradeEnrollmentUC(courseRepo, clock);
+
+    int teacherId = 1;
+    int courseId = 999;
+    int enrollmentId = 999;
+    int gradeValue = static_cast<int>(Grade::GradeEnum::EXCELLENT);
+    GradeEnrollmentCommand gradeCommand{courseId, enrollmentId, 1, Grade::GradeEnum::EXCELLENT};
+
+    // Act & Assert
+    EXPECT_THROW(
+        { gradeEnrollmentUC.execute(gradeCommand); },
+        std::runtime_error);
+}
+
+TEST_F(FunctionalTest, GradeEnrollmentUseCase_Execute_NoEnrollmentNoOp)
+{
+    // Arrange
+    CreateCourseUseCase createCourseUC(courseRepo, idGenerator);
+    GradeEnrollmentUseCase gradeEnrollmentUC(courseRepo, clock);
+    CreateCourseCommand courseCommand{1001, "Math 101", "Introduction to Mathematics"};
+    int courseId = createCourseUC.execute(courseCommand);
+
+    int enrollmentId = 999;
+    GradeEnrollmentCommand gradeCommand{courseId, enrollmentId, courseCommand.teacherId, Grade::GradeEnum::EXCELLENT};
+
+    // Act
+    gradeEnrollmentUC.execute(gradeCommand);
+
+    // Assert
+    GetCourseUseCase getCourseUC(courseRepo);
+    CourseDTO retrievedCourse = getCourseUC.execute(courseId);
+    auto enrollments = retrievedCourse.enrollments;
+    bool enrollmentFound = false;
+    for (const auto &enrollment : enrollments)
+    {
+        if (enrollment.id == enrollmentId)
+        {
+            enrollmentFound = true;
+        }
+    }
+    EXPECT_FALSE(enrollmentFound);
 }

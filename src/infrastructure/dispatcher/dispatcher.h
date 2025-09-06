@@ -10,9 +10,10 @@
 class Dispatcher
 {
 public:
-    Dispatcher(ICreateCourseUseCase &createCourseUC,
-               IEnrollStudentUseCase &enrollStudentUC,
-               IGradeEnrollmentUseCase &gradeEnrollmentUC, IGetCourseUseCase &getCourseUC)
+    Dispatcher(std::shared_ptr<ICreateCourseUseCase> createCourseUC,
+               std::shared_ptr<IEnrollStudentUseCase> enrollStudentUC,
+               std::shared_ptr<IGradeEnrollmentUseCase> gradeEnrollmentUC,
+               std::shared_ptr<IGetCourseUseCase> getCourseUC)
         : createCourseUseCase(createCourseUC),
           enrollStudentUseCase(enrollStudentUC),
           gradeEnrollmentUseCase(gradeEnrollmentUC),
@@ -66,10 +67,10 @@ public:
     }
 
 private:
-    ICreateCourseUseCase &createCourseUseCase;
-    IEnrollStudentUseCase &enrollStudentUseCase;
-    IGradeEnrollmentUseCase &gradeEnrollmentUseCase;
-    IGetCourseUseCase &getCourseUseCase;
+    std::shared_ptr<ICreateCourseUseCase> createCourseUseCase;
+    std::shared_ptr<IEnrollStudentUseCase> enrollStudentUseCase;
+    std::shared_ptr<IGradeEnrollmentUseCase> gradeEnrollmentUseCase;
+    std::shared_ptr<IGetCourseUseCase> getCourseUseCase;
 
     void showMainMenu()
     {
@@ -92,7 +93,7 @@ private:
         std::cout << "Enter course description: ";
         std::getline(std::cin, cmd.description);
 
-        int courseId = createCourseUseCase.execute(cmd);
+        int courseId = createCourseUseCase->execute(cmd);
         std::cout << "Course '" << cmd.title << "' successfully created with ID = " << courseId << "\n";
     }
 
@@ -104,7 +105,7 @@ private:
         std::cout << "Enter student ID: ";
         std::cin >> cmd.studentId;
 
-        int enrollmentId = enrollStudentUseCase.execute(cmd);
+        int enrollmentId = enrollStudentUseCase->execute(cmd);
         std::cout << "Student " << cmd.studentId << " successfully enrolled in course "
                   << cmd.courseId << ". Enrollment ID = " << enrollmentId << "\n";
     }
@@ -123,7 +124,7 @@ private:
         std::cin >> gradeValue;
         cmd.gradeValue = static_cast<Grade::GradeEnum>(gradeValue);
 
-        gradeEnrollmentUseCase.execute(cmd);
+        gradeEnrollmentUseCase->execute(cmd);
         std::cout << "Grade successfully assigned.\n";
     }
 
@@ -133,7 +134,7 @@ private:
         std::cout << "Enter course ID to view: ";
         std::cin >> courseId;
 
-        auto courseDTO = getCourseUseCase.execute(courseId);
+        auto courseDTO = getCourseUseCase->execute(courseId);
 
         std::cout << "\nCourse ID: " << courseDTO.id << "\n";
         std::cout << "Title: " << courseDTO.title << "\n";
