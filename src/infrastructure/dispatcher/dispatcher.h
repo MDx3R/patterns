@@ -6,11 +6,11 @@
 #include "presentation/controllers/command_controller.h"
 #include "presentation/controllers/query_controller.h"
 
-class ProductDispatcher
+class Dispatcher
 {
 public:
-    ProductDispatcher(std::shared_ptr<CommandController> cmdCtrl,
-                      std::shared_ptr<QueryController> qryCtrl)
+    Dispatcher(std::shared_ptr<CommandController> cmdCtrl,
+               std::shared_ptr<QueryController> qryCtrl)
         : commandController(std::move(cmdCtrl)),
           queryController(std::move(qryCtrl))
     {
