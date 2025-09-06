@@ -13,8 +13,7 @@ public:
     std::time_t getExpirationDate() const;
     bool hasExpired(std::time_t now) const;
 
-    bool operator==(const Milk &other) const
-    {
-        return Product::operator==(other) && expirationDate == other.expirationDate;
-    }
+    std::string toString() override;
+
+    bool operator==(const Milk &other) const;
 };

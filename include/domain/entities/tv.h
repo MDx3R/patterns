@@ -11,8 +11,7 @@ public:
 
     int getScreenSize() const;
 
-    bool operator==(const TV &other) const
-    {
-        return Product::operator==(other) && screenSize == other.screenSize;
-    }
+    std::string toString() override;
+
+    bool operator==(const TV &other) const;
 };

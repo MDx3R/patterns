@@ -22,8 +22,5 @@ public:
 
     virtual std::string toString() = 0;
 
-    bool operator==(const Product &other) const
-    {
-        return id == other.id && name == other.name && price == other.price && quantity == other.quantity;
-    };
+    bool operator==(const Product &other) const;
 };

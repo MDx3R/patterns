@@ -11,8 +11,7 @@ public:
 
     int getAgeLimit() const;
 
-    bool operator==(const Toy &other) const
-    {
-        return Product::operator==(other) && ageLimit == other.ageLimit;
-    }
+    std::string toString() override;
+
+    bool operator==(const Toy &other) const;
 };
