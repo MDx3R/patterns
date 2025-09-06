@@ -63,3 +63,12 @@ void Course::clearEnrollments()
 {
     enrollments.clear();
 }
+
+bool Course::operator==(const Course &other) const
+{
+    return courseId == other.courseId &&
+           title == other.title &&
+           description == other.description &&
+           teacherId == other.teacherId &&
+           enrollments == other.enrollments;
+}

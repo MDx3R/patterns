@@ -32,12 +32,5 @@ public:
     void gradeEnrollment(int enrollmentId, Grade &grade);
     void clearEnrollments();
 
-    bool operator==(const Course &other) const
-    {
-        return courseId == other.courseId &&
-               title == other.title &&
-               description == other.description &&
-               teacherId == other.teacherId &&
-               enrollments == other.enrollments;
-    }
+    bool operator==(const Course &other) const;
 };

@@ -27,3 +27,11 @@ void Enrollment::setGrade(std::optional<Grade> newGrade)
 {
     grade = std::move(newGrade);
 }
+
+bool Enrollment::operator==(const Enrollment &other) const
+{
+    return enrollmentId == other.enrollmentId &&
+           studentId == other.studentId &&
+           courseId == other.courseId &&
+           grade == other.grade;
+}

@@ -22,3 +22,11 @@ std::time_t Grade::getDate() const
 {
     return date;
 }
+
+bool Grade::operator==(const Grade &other) const
+{
+    return gradeId == other.gradeId &&
+           teacherId == other.teacherId &&
+           value == other.value &&
+           date == other.date;
+}

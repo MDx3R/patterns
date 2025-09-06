@@ -22,11 +22,5 @@ public:
 
     void setGrade(std::optional<Grade> newGrade);
 
-    bool operator==(const Enrollment &other) const
-    {
-        return enrollmentId == other.enrollmentId &&
-               studentId == other.studentId &&
-               courseId == other.courseId &&
-               grade == other.grade;
-    }
+    bool operator==(const Enrollment &other) const;
 };
