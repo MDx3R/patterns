@@ -1,7 +1,7 @@
 #pragma once
-#include "create_tv_use_case.h"
-#include "product_repository.h"
-#include "id_generator.h"
+#include "application/usecases/create_tv_use_case.h"
+#include "application/repositories/product_repository.h"
+#include "domain/services/id_generator.h"
 
 class CreateTVUseCase : public ICreateTVUseCase
 {

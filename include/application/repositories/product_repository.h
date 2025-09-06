@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include "product.h"
+#include "domain/entities/product.h"
 
 class IProductRepository
 {

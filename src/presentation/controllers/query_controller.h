@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "product.h"
-#include "get_product_use_case.h"
+#include "domain/entities/product.h"
+#include "application/usecases/get_product_use_case.h"
 
 class QueryController
 {

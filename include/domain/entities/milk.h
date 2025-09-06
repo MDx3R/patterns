@@ -1,5 +1,5 @@
 #pragma once
-#include "product.h"
+#include "domain/entities/product.h"
 #include <ctime>
 
 class Milk : public Product

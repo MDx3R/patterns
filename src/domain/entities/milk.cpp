@@ -1,4 +1,4 @@
-#include "milk.h"
+#include "domain/entities/milk.h"
 
 Milk::Milk(int id, const std::string &name, double price, int quantity, std::time_t expirationDate)
     : Product(id, name, price, quantity), expirationDate(expirationDate) {}

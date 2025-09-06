@@ -1,5 +1,5 @@
 #pragma once
-#include "product.h"
+#include "domain/entities/product.h"
 
 class Toy : public Product
 {

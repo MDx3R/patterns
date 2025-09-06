@@ -1,4 +1,4 @@
-#include "toy.h"
+#include "domain/entities/toy.h"
 
 Toy::Toy(int id, const std::string &name, double price, int quantity, int ageLimit)
     : Product(id, name, price, quantity), ageLimit(ageLimit) {}

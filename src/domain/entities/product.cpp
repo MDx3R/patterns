@@ -1,4 +1,4 @@
-#include "product.h"
+#include "domain/entities/product.h"
 
 Product::Product(int id, const std::string &name, double price, int quantity)
     : id(id), name(name), price(price), quantity(quantity) {}

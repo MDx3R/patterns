@@ -1,5 +1,5 @@
-#include "create_milk_use_case_impl.h"
-#include "milk.h"
+#include "application/usecases/create_milk_use_case_impl.h"
+#include "domain/entities/milk.h"
 
 CreateMilkUseCase::CreateMilkUseCase(std::shared_ptr<IProductRepository> repo, std::shared_ptr<IIdGenerator> gen) : repository(repo), idGenerator(gen) {}
 

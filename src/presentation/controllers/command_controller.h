@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
-#include "create_milk_use_case.h"
-#include "create_toy_use_case.h"
-#include "create_tv_use_case.h"
+#include "application/usecases/create_milk_use_case.h"
+#include "application/usecases/create_toy_use_case.h"
+#include "application/usecases/create_tv_use_case.h"
 
 class CommandController
 {

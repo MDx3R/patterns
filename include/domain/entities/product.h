@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <memory>
-#include "pricable.h"
 
 class Product
 {

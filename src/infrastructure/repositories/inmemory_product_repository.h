@@ -1,6 +1,6 @@
 #pragma once
-#include "product.h"
-#include "product_repository.h"
+#include "domain/entities/product.h"
+#include "application/repositories/product_repository.h"
 #include <vector>
 #include <memory>
 #include <algorithm>

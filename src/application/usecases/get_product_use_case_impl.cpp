@@ -1,4 +1,4 @@
-#include "get_product_use_case_impl.h"
+#include "application/usecases/get_product_use_case_impl.h"
 
 GetProductUseCase::GetProductUseCase(std::shared_ptr<IProductRepository> repo) : repository(repo) {}
 

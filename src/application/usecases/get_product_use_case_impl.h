@@ -1,6 +1,6 @@
 #pragma once
-#include "get_product_use_case.h"
-#include "product_repository.h"
+#include "application/usecases/get_product_use_case.h"
+#include "application/repositories/product_repository.h"
 
 class GetProductUseCase : public IGetProductUseCase
 {

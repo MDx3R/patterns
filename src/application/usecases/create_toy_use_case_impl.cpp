@@ -1,5 +1,5 @@
-#include "create_toy_use_case_impl.h"
-#include "toy.h"
+#include "application/usecases/create_toy_use_case_impl.h"
+#include "domain/entities/toy.h"
 
 CreateToyUseCase::CreateToyUseCase(std::shared_ptr<IProductRepository> repo, std::shared_ptr<IIdGenerator> gen) : repository(repository), idGenerator(gen) {}
 

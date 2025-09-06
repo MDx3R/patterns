@@ -3,8 +3,8 @@
 #include <memory>
 #include <string>
 
-#include "command_controller.h"
-#include "query_controller.h"
+#include "presentation/controllers/command_controller.h"
+#include "presentation/controllers/query_controller.h"
 
 class ProductDispatcher
 {

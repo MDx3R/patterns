@@ -1,5 +1,5 @@
-#include "create_tv_use_case_impl.h"
-#include "tv.h"
+#include "application/usecases/create_tv_use_case_impl.h"
+#include "domain/entities/tv.h"
 
 CreateTVUseCase::CreateTVUseCase(std::shared_ptr<IProductRepository> repo, std::shared_ptr<IIdGenerator> gen) : repository(repo), idGenerator(gen) {}
 

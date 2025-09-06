@@ -1,4 +1,4 @@
-#include "tv.h"
+#include "domain/entities/tv.h"
 
 TV::TV(int id, const std::string &name, double price, int quantity, int screenSize)
     : Product(id, name, price, quantity), screenSize(screenSize) {}
