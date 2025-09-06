@@ -14,6 +14,7 @@ public:
     bool hasExpired(std::time_t now) const;
 
     std::string toString() override;
+    std::unique_ptr<Product> copy() const override;
 
     bool operator==(const Milk &other) const;
 };

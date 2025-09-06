@@ -12,6 +12,7 @@ public:
     int getScreenSize() const;
 
     std::string toString() override;
+    std::unique_ptr<Product> copy() const override;
 
     bool operator==(const TV &other) const;
 };

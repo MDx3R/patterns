@@ -21,6 +21,7 @@ public:
     double getQuantity() const;
 
     virtual std::string toString() = 0;
+    virtual std::unique_ptr<Product> copy() const = 0;
 
     bool operator==(const Product &other) const;
 };

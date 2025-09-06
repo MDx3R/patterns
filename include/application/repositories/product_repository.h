@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include "product.h"
 
 class IProductRepository
@@ -7,7 +8,7 @@ class IProductRepository
 public:
     virtual ~IProductRepository() = default;
 
-    virtual Product getById(int id) = 0;
-    virtual std::vector<Product> all() = 0;
-    virtual void save(const Product &product) = 0;
+    virtual std::unique_ptr<Product> getById(int id) = 0;
+    virtual std::vector<std::unique_ptr<Product>> all() = 0;
+    virtual void save(const std::unique_ptr<Product> product) = 0;
 };

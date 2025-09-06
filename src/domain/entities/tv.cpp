@@ -14,6 +14,11 @@ std::string TV::toString()
            ", Quantity=" + std::to_string(quantity) + ", Screen Size=" + std::to_string(screenSize) + " inches";
 }
 
+std::unique_ptr<Product> TV::copy() const
+{
+    return std::make_unique<TV>(*this);
+}
+
 bool TV::operator==(const TV &other) const
 {
     return Product::operator==(other) && screenSize == other.screenSize;
