@@ -129,11 +129,7 @@ TEST_F(FunctionalTest, EnrollStudentUseCase_Execute_NoCourseThrows)
     EnrollStudentCommand enrollCommand{courseId, 2001};
 
     // Act & Assert
-    EXPECT_THROW(
-        {
-            enrollStudentUC.execute(enrollCommand);
-        },
-        std::runtime_error);
+    EXPECT_THROW(enrollStudentUC.execute(enrollCommand), std::runtime_error);
 }
 
 TEST_F(FunctionalTest, GradeEnrollmentUseCase_Execute_NoCourseThrows)
@@ -148,9 +144,7 @@ TEST_F(FunctionalTest, GradeEnrollmentUseCase_Execute_NoCourseThrows)
     GradeEnrollmentCommand gradeCommand{courseId, enrollmentId, 1, Grade::GradeEnum::EXCELLENT};
 
     // Act & Assert
-    EXPECT_THROW(
-        { gradeEnrollmentUC.execute(gradeCommand); },
-        std::runtime_error);
+    EXPECT_THROW(gradeEnrollmentUC.execute(gradeCommand), std::runtime_error);
 }
 
 TEST_F(FunctionalTest, GradeEnrollmentUseCase_Execute_NoEnrollmentNoOp)
