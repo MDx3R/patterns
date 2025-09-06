@@ -15,6 +15,7 @@ public:
 
     std::string toString() override;
     std::unique_ptr<Product> copy() const override;
+    std::shared_ptr<Product> copyShared() const override;
 
     bool operator==(const Milk &other) const;
 };

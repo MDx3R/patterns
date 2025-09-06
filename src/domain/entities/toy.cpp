@@ -19,6 +19,11 @@ std::unique_ptr<Product> Toy::copy() const
     return std::make_unique<Toy>(*this);
 }
 
+std::shared_ptr<Product> Toy::copyShared() const
+{
+    return std::make_shared<Toy>(*this);
+}
+
 bool Toy::operator==(const Toy &other) const
 {
     return Product::operator==(other) && ageLimit == other.ageLimit;

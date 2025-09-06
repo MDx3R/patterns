@@ -27,6 +27,11 @@ std::unique_ptr<Product> Milk::copy() const
     return std::make_unique<Milk>(*this);
 }
 
+std::shared_ptr<Product> Milk::copyShared() const
+{
+    return std::make_shared<Milk>(*this);
+}
+
 bool Milk::operator==(const Milk &other) const
 {
     return Product::operator==(other) && expirationDate == other.expirationDate;

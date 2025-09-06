@@ -19,6 +19,11 @@ std::unique_ptr<Product> TV::copy() const
     return std::make_unique<TV>(*this);
 }
 
+std::shared_ptr<Product> TV::copyShared() const
+{
+    return std::make_shared<TV>(*this);
+}
+
 bool TV::operator==(const TV &other) const
 {
     return Product::operator==(other) && screenSize == other.screenSize;
