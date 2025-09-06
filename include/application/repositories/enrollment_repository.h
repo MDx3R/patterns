@@ -3,8 +3,9 @@
 #include <vector>
 #include "domain/entity/enrollment.h"
 
-struct IEnrollmentRepository
+class IEnrollmentRepository
 {
+public:
     virtual ~IEnrollmentRepository() = default;
     virtual void save(const Enrollment &) = 0; // upsert
     virtual Enrollment getById(int id) const = 0;

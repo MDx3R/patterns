@@ -2,8 +2,9 @@
 #include <vector>
 #include "domain/entity/teacher.h"
 
-struct ITeacherRepository
+class ITeacherRepository
 {
+public:
     virtual ~ITeacherRepository() = default;
     virtual void save(const Teacher &) = 0;
     virtual Teacher getById(int id) const = 0;

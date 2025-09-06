@@ -1,6 +1,8 @@
 #pragma once
-struct IIdGenerator
+
+class IIdGenerator
 {
+public:
     virtual int getNext() = 0;
 };
 
