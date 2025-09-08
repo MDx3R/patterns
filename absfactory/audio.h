@@ -6,17 +6,17 @@ class AudioTrack
 {
 public:
     virtual ~AudioTrack() = default;
-    virtual Language language() = 0;
+    virtual Language getLanguage() const = 0;
 };
 
 class EnglishAudio : public AudioTrack
 {
 public:
-    Language language() override { return Language::ENGLISH; };
+    Language getLanguage() const override { return Language::ENGLISH; };
 };
 
 class RussianAudio : public AudioTrack
 {
 public:
-    Language language() override { return Language::RUSSIAN; };
+    Language getLanguage() const override { return Language::RUSSIAN; };
 };

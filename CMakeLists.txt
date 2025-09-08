@@ -8,7 +8,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(BUILD_TESTING "Build unit tests" ON)
 
-add_subdirectory(factory)
+add_library(absfactory  INTERFACE)
+target_include_directories(absfactory  INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/absfactory 
+)
+
+add_subdirectory(app)
 
 if(BUILD_TESTING)
     enable_testing()

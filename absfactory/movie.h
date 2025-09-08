@@ -18,6 +18,16 @@ public:
         validateAudioAndSubtitles();
     };
 
+    Language getAudioLanguage() const
+    {
+        return audio->getLanguage();
+    }
+
+    Language getSubtitlesLanguage() const
+    {
+        return subtitles->getLanguage();
+    }
+
     void setAudioAndSubtitles(std::unique_ptr<AudioTrack> aud, std::unique_ptr<SubtitlesFile> subs)
     {
         this->audio = std::move(aud);
@@ -28,7 +38,7 @@ public:
 private:
     void validateAudioAndSubtitles()
     {
-        if (audio->language() != subtitles->language())
+        if (audio->getLanguage() != subtitles->getLanguage())
         {
             throw std::invalid_argument("Language for audio and subtitles must match");
         }
