@@ -8,6 +8,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(BUILD_TESTING "Build unit tests" ON)
 
+add_subdirectory(factory)
+
 if(BUILD_TESTING)
     enable_testing()
     # add_subdirectory(external/googletest)
