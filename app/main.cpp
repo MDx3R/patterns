@@ -17,8 +17,6 @@ int main()
 {
     std::srand(std::time(nullptr));
 
-    std::cout << "Current path: " << std::filesystem::current_path() << "\n";
-
     bool running = true;
     while (running)
     {
