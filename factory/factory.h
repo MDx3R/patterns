@@ -15,13 +15,13 @@ public:
 class EnglishMovieFactory : public IMovieFactory
 {
 public:
-    std::unique_ptr<AudioTrack> createAudio() override;
-    std::unique_ptr<SubtitlesFile> createSubtitles() override;
+    std::unique_ptr<AudioTrack> createAudio() override { return std::make_unique<EnglishAudio>(); };
+    std::unique_ptr<SubtitlesFile> createSubtitles() override { return std::make_unique<EnglishSubtitles>(); };
 };
 
 class RussianMovieFactory : public IMovieFactory
 {
 public:
-    std::unique_ptr<AudioTrack> createAudio() override;
-    std::unique_ptr<SubtitlesFile> createSubtitles() override;
+    std::unique_ptr<AudioTrack> createAudio() override { return std::make_unique<RussianAudio>(); };
+    std::unique_ptr<SubtitlesFile> createSubtitles() override { return std::make_unique<RussianSubtitles>(); };
 };
