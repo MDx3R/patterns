@@ -18,6 +18,11 @@ target_include_directories(factory  INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/factory 
 )
 
+add_library(builder  INTERFACE)
+target_include_directories(builder  INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/builder 
+)
+
 add_subdirectory(app)
 
 if(BUILD_TESTING)

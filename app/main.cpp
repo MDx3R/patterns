@@ -9,9 +9,15 @@
 #include "shape_dispatcher.h"
 #include "shape_factory.h"
 
+#include "article_dispatcher.h"
+
+#include <filesystem>
+
 int main()
 {
     std::srand(std::time(nullptr));
+
+    std::cout << "Current path: " << std::filesystem::current_path() << "\n";
 
     bool running = true;
     while (running)
@@ -21,7 +27,7 @@ int main()
         std::cout << "========================\n";
         std::cout << "1. Abstract Factory (Movies)\n";
         std::cout << "2. Factory Method (Tetris Shapes)\n";
-        std::cout << "3. Builder\n";
+        std::cout << "3. Builder (TXT to XML article)\n";
         std::cout << "4. Exit\n";
         std::cout << "Select: ";
 
@@ -51,7 +57,8 @@ int main()
             break;
         }
         case 3:
-            std::cout << "Builder example not implemented yet.\n";
+            ArticleDispatcher articleDispatcher;
+            articleDispatcher.start();
             break;
         case 4:
             running = false;
