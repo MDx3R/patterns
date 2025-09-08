@@ -3,11 +3,11 @@
 #include <memory>
 #include "shape_factory.h"
 
-class Dispatcher
+class ShapeDispatcher
 {
 public:
-    Dispatcher(std::shared_ptr<IShapeFactory> ordinaryFactory,
-               std::shared_ptr<IShapeFactory> superFactory)
+    ShapeDispatcher(std::shared_ptr<IShapeFactory> ordinaryFactory,
+                    std::shared_ptr<IShapeFactory> superFactory)
         : ordinaryFactory(std::move(ordinaryFactory)),
           superFactory(std::move(superFactory)) {}
 

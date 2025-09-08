@@ -38,15 +38,15 @@ int main()
             std::unordered_map<Language, std::shared_ptr<IMovieFactory>> mp = {{Language::ENGLISH, englishFactory},
                                                                                {Language::RUSSIAN, russianFactory}};
             auto movieService = std::make_shared<MovieService>(mp);
-            MovieDispatcher dispatcher(movieService);
-            dispatcher.start();
+            MovieDispatcher movieDispatcher(movieService);
+            movieDispatcher.start();
             break;
         }
         case 2:
         {
             auto ordinaryFactory = std::make_shared<TetrisShapeFactory>();
             auto superFactory = std::make_shared<SuperShapeFactory>();
-            Dispatcher shapeDispatcher(ordinaryFactory, superFactory);
+            ShapeDispatcher shapeDispatcher(ordinaryFactory, superFactory);
             shapeDispatcher.start();
             break;
         }
