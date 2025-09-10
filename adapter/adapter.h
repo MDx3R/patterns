@@ -21,7 +21,7 @@ public:
     GasTankAdapter() = default;
     GasTankAdapter(GasTank &tank) : tank(tank) {} // TODO: Параменры для конструктора
 
-    double calculateDp(int t0, int dT) { return tank.getPressure(t0) * (t0 + dT) / t0; }
-    void modifyMass(int dm) { tank.setMass(dm); }
-    std::string getData() { return tank.toString(); }
+    double calculateDp(int t0, int dT) override { return tank.getPressure(t0) * (t0 + dT) / t0; }
+    void modifyMass(int dm) override { tank.setMass(dm); }
+    std::string getData() override { return tank.toString(); }
 };
