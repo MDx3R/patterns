@@ -22,6 +22,6 @@ add_subdirectory(app)
 
 if(BUILD_TESTING)
     enable_testing()
-    # add_subdirectory(external/googletest)
-    # add_subdirectory(tests)
+    add_subdirectory(external/googletest)
+    add_subdirectory(tests)
 endif()
