@@ -14,24 +14,24 @@ private:
     subsystem::PremiumCalculator &premiumCalc;
 
 public:
-    double calculatePremium(Property &property)
+    double calculatePremium(const Property &property)
     {
         double base = tariffCalc.baseTariff(property);
         double risk = riskCalc.calculateRisk(property);
         return premiumCalc.calculatePremium(property, base, risk);
     }
 
-    double getRiskFactor(Property &property)
+    double getRiskFactor(const Property &property)
     {
         return riskCalc.calculateRisk(property);
     }
 
-    double getBaseTariff(Property &property)
+    double getBaseTariff(const Property &property)
     {
         return tariffCalc.baseTariff(property);
     }
 
-    std::map<int, double> simulateScenarios(Property &property, const std::vector<int> &years)
+    std::map<int, double> simulateScenarios(const Property &property, const std::vector<int> &years)
     {
         std::map<int, double> result;
         double base = tariffCalc.baseTariff(property);
@@ -45,7 +45,7 @@ public:
         return result;
     }
 
-    bool isInsurable(Property &property)
+    bool isInsurable(const Property &property)
     {
         return property.getWear() < 80.0;
     }

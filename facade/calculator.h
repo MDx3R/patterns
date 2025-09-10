@@ -7,7 +7,7 @@ namespace subsystem
     class RiskCalculator
     {
     public:
-        double calculateRisk(Property &p)
+        double calculateRisk(const Property &p)
         {
             double risk = 1.0;
             if (p.getYearBuilt() < 1980)
@@ -20,7 +20,7 @@ namespace subsystem
     class TariffCalculator
     {
     public:
-        double baseTariff(Property &p)
+        double baseTariff(const Property &p)
         {
             // OCP :(
             if (p.getType() == "Apartment")
