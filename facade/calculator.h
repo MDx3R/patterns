@@ -7,6 +7,7 @@ namespace subsystem
     class RiskCalculator
     {
     public:
+        // Фактор, писывающий риск страхового случая
         double calculateRisk(const Property &p)
         {
             double risk = 1.0;
@@ -20,6 +21,7 @@ namespace subsystem
     class TariffCalculator
     {
     public:
+        // Тарифф за единицу площади (e.g. baseTariff * area)
         double baseTariff(const Property &p)
         {
             // OCP :(
@@ -40,6 +42,7 @@ namespace subsystem
         double residentFactor = 0.05;
 
     public:
+        // Выплата по страховке за год
         double calculatePremium(const Property &property, double baseTariff, double risk) const
         {
             double area = property.getArea();

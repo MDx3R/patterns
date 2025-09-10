@@ -8,7 +8,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 option(BUILD_TESTING "Build unit tests" ON)
 
-# add_subdirectory(app)
+add_library(adapter  INTERFACE)
+target_include_directories(adapter  INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/adapter 
+)
+
+add_library(facade  INTERFACE)
+target_include_directories(facade  INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/facade 
+)
+
+add_subdirectory(app)
 
 if(BUILD_TESTING)
     enable_testing()

@@ -28,6 +28,7 @@ namespace subsystem
     class Apartment : public Property
     {
     public:
+        Apartment(double area, int yearBuilt, int residents, double wear) : Property(area, yearBuilt, residents, wear) {}
         std::string getType() const override { return "Apartment"; }
     };
 
