@@ -14,6 +14,10 @@ private:
     subsystem::PremiumCalculator &premiumCalc;
 
 public:
+    InsuranceFacade(subsystem::RiskCalculator &riskCalc,
+                    subsystem::TariffCalculator &tariffCalc,
+                    subsystem::PremiumCalculator &premiumCalc) : riskCalc(riskCalc), tariffCalc(tariffCalc), premiumCalc(premiumCalc) {}
+
     double calculatePremium(const Property &property)
     {
         double base = tariffCalc.baseTariff(property);
