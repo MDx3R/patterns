@@ -5,10 +5,9 @@
 #include "movie_dispatcher.h"
 #include "movie_service.h"
 #include "movie_factory.h"
-
+#include "mvc_dispatcher.h"
 #include "shape_dispatcher.h"
 #include "shape_factory.h"
-
 #include "article_dispatcher.h"
 
 #include <filesystem>
@@ -26,7 +25,8 @@ int main()
         std::cout << "1. Abstract Factory (Movies)\n";
         std::cout << "2. Factory Method (Tetris Shapes)\n";
         std::cout << "3. Builder (TXT to XML article)\n";
-        std::cout << "4. Exit\n";
+        std::cout << "4. MVC Movie Controller\n";
+        std::cout << "5. Exit\n";
         std::cout << "Select: ";
 
         int choice;
@@ -55,10 +55,23 @@ int main()
             break;
         }
         case 3:
+        {
             ArticleDispatcher articleDispatcher;
             articleDispatcher.start();
             break;
+        }
         case 4:
+        {
+            auto englishFactory = std::make_shared<EnglishMovieFactory>();
+            auto russianFactory = std::make_shared<RussianMovieFactory>();
+            std::unordered_map<Language, std::shared_ptr<IMovieFactory>> mp = {{Language::ENGLISH, englishFactory},
+                                                                               {Language::RUSSIAN, russianFactory}};
+            auto movieService = std::make_shared<MovieService>(mp);
+            MVCDispatcher mvcDispatcher(movieService);
+            mvcDispatcher.start();
+            break;
+        }
+        case 5:
             running = false;
             break;
         default:

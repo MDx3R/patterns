@@ -4,8 +4,9 @@
 #include <stdexcept>
 #include "audio.h"
 #include "subtitles.h"
+#include "observable.h"
 
-class Movie
+class Movie : public Observable
 {
 private:
     std::unique_ptr<AudioTrack> audio;
@@ -33,6 +34,14 @@ public:
         this->audio = std::move(aud);
         this->subtitles = std::move(subs);
         validateAudioAndSubtitles();
+        notifyUpdate();
+    }
+
+    void clearAudioAndSubtitles()
+    {
+        this->audio = nullptr;
+        this->subtitles = nullptr;
+        notifyUpdate();
     }
 
 private:
