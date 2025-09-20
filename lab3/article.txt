@@ -1,0 +1,6 @@
+Understanding Builder Pattern
+John Doe, Jane Smith
+The Builder pattern is a creational design pattern.
+It allows constructing complex objects step by step.
+It separates the construction of a complex object from its representation and use.
+7827758412033425848
