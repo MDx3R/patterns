@@ -2,9 +2,8 @@
 
 int main()
 {
-    // ID=1, кол-во денег=10000, вероятность=0.10
-    auto atm = std::make_shared<ATM>(1, 10000.0, 0.1);
-    ATMDispatcher dispatcher(atm);
+    auto cal = std::make_shared<Calendar>();
+    CalendarDispatcher dispatcher(cal);
     dispatcher.start();
     return 0;
 }
