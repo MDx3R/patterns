@@ -1,45 +1,45 @@
 #pragma once
 #include <string>
-#include <iostream>
+#include <memory>
 
 class Event
 {
 protected:
     std::string date;
-    std::string name;
+    std::string eventName;
     std::string description;
 
 public:
-    Event() : date(""), name(""), description("") {}
-    Event(const std::string &d, const std::string &n, const std::string &desc)
-        : date(d), name(n), description(desc) {}
-    Event(const Event &other) : date(other.date), name(other.name), description(other.description) {}
+    Event() : date(""), eventName(""), description("") {}
+    Event(const std::string &d, const std::string &en, const std::string &desc)
+        : date(d), eventName(en), description(desc) {}
+    Event(const Event &other) : date(other.date), eventName(other.eventName), description(other.description) {}
     virtual ~Event() = default;
 
-    virtual void print(std::ostream &os) const
+    virtual std::string print() const
     {
-        os << "Date: " << date << ", Name: " << name << ", Description: " << description;
+        return "Date: " + date + ", Name: " + eventName + ", Description: " + description;
     }
 
-    friend std::ostream &operator<<(std::ostream &os, const Event &e)
-    {
-        e.print(os);
-        return os;
-    }
+    virtual Event *clone() const = 0;
 };
 
 class OneTimeEvent : public Event
 {
 public:
     OneTimeEvent() = default;
-    OneTimeEvent(const std::string &d, const std::string &n, const std::string &desc)
-        : Event(d, n, desc) {}
+    OneTimeEvent(const std::string &d, const std::string &en, const std::string &desc)
+        : Event(d, en, desc) {}
     OneTimeEvent(const OneTimeEvent &other) : Event(other) {}
 
-    void print(std::ostream &os) const override
+    std::string print() const override
     {
-        os << "OneTimeEvent - ";
-        Event::print(os);
+        return "OneTimeEvent - " + Event::print();
+    }
+
+    Event *clone() const override
+    {
+        return new OneTimeEvent(*this);
     }
 };
 
@@ -50,13 +50,65 @@ private:
 
 public:
     RecurringEvent() : frequency("") {}
-    RecurringEvent(const std::string &d, const std::string &n, const std::string &desc, const std::string &freq)
-        : Event(d, n, desc), frequency(freq) {}
+    RecurringEvent(const std::string &d, const std::string &en, const std::string &desc, const std::string &freq)
+        : Event(d, en, desc), frequency(freq) {}
     RecurringEvent(const RecurringEvent &other) : Event(other), frequency(other.frequency) {}
 
-    void print(std::ostream &os) const override
+    std::string print() const override
     {
-        os << "RecurringEvent (Frequency: " << frequency << ") - ";
-        Event::print(os);
+        return "RecurringEvent (Frequency: " + frequency + ") - " + Event::print();
+    }
+
+    Event *clone() const override
+    {
+        return new RecurringEvent(*this);
+    }
+};
+
+class EventDecorator : public Event
+{
+protected:
+    std::unique_ptr<Event> component;
+
+public:
+    EventDecorator(std::unique_ptr<Event> event) : component(std::move(event)) {}
+    virtual ~EventDecorator() = default;
+
+    Event *clone() const override = 0;
+};
+
+class HighPriorityDecorator : public EventDecorator
+{
+public:
+    HighPriorityDecorator(std::unique_ptr<Event> event) : EventDecorator(std::move(event)) {}
+
+    std::string print() const override
+    {
+        return "HIGH PRIORITY: " + component->print();
+    }
+
+    Event *clone() const override
+    {
+        return new HighPriorityDecorator(std::unique_ptr<Event>(component->clone()));
+    }
+};
+
+class ReminderDecorator : public EventDecorator
+{
+private:
+    std::string reminderTime;
+
+public:
+    ReminderDecorator(std::unique_ptr<Event> event, const std::string &rt)
+        : EventDecorator(std::move(event)), reminderTime(rt) {}
+
+    std::string print() const override
+    {
+        return component->print() + " (Reminder at " + reminderTime + ")";
+    }
+
+    Event *clone() const override
+    {
+        return new ReminderDecorator(std::unique_ptr<Event>(component->clone()), reminderTime);
     }
 };

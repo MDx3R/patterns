@@ -4,30 +4,19 @@
 class Calendar
 {
 private:
-    std::string roomName;
+    std::string name;
     std::string address;
     std::vector<Event *> events;
     std::unique_ptr<OutputStrategy> strategy;
 
 public:
-    Calendar() : roomName(""), address("") {}
-    Calendar(const std::string &rn, const std::string &addr) : roomName(rn), address(addr) {}
-    Calendar(const Calendar &other) : roomName(other.roomName), address(other.address)
+    Calendar() : name(""), address("") {}
+    Calendar(const std::string &n, const std::string &addr) : name(n), address(addr) {}
+    Calendar(const Calendar &other) : name(other.name), address(other.address)
     {
         for (const auto &e : other.events)
         {
-            if (dynamic_cast<OneTimeEvent *>(e))
-            {
-                events.push_back(new OneTimeEvent(*static_cast<OneTimeEvent *>(e)));
-            }
-            else if (dynamic_cast<RecurringEvent *>(e))
-            {
-                events.push_back(new RecurringEvent(*static_cast<RecurringEvent *>(e)));
-            }
-            else
-            {
-                events.push_back(new Event(*e));
-            }
+            events.push_back(e->clone());
         }
     }
     ~Calendar()
@@ -50,27 +39,28 @@ public:
         }
     }
 
-    std::string getRoomName() const { return roomName; }
+    std::string getName() const { return name; }
     std::string getAddress() const { return address; }
+    std::vector<Event *> &getEvents() { return events; }
     const std::vector<Event *> &getEvents() const { return events; }
 };
 
 void TextOutput::print(const Calendar &calendar) const
 {
-    std::cout << "Calendar Room: " << calendar.getRoomName() << ", Address: " << calendar.getAddress() << "\n";
+    std::cout << "Calendar Name: " << calendar.getName() << ", Address: " << calendar.getAddress() << "\n";
     for (const auto &e : calendar.getEvents())
     {
-        std::cout << *e << "\n";
+        std::cout << e->print() << "\n";
     }
     std::cout << "\n";
 }
 
 void HtmlOutput::print(const Calendar &calendar) const
 {
-    std::cout << "<h1>" << calendar.getRoomName() << "</h1>\n<p>Address: " << calendar.getAddress() << "</p>\n";
+    std::cout << "<h1>" << calendar.getName() << "</h1>\n<p>Address: " << calendar.getAddress() << "</p>\n";
     for (const auto &e : calendar.getEvents())
     {
-        std::cout << "<p>" << *e << "</p>\n";
+        std::cout << "<p>" << e->print() << "</p>\n";
     }
     std::cout << "\n";
 }
