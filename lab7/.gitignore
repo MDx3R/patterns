@@ -1,0 +1,51 @@
+# Файлы сборки
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Бинарные файлы
+*.exe
+*.out
+*.obj
+*.o
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+
+# Временные файлы
+*.log
+*.tmp
+*.temp
+
+# IDE и редакторы
+.vscode/
+.vs/
+.idea/
+*.suo
+*.user
+*.userprefs
+*.ncb
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+
+# Qt
+*.moc
+*.qmlc
+*.qrc.cpp
+*.qrc.o
+*.obj
+*.pch
+*.pro.user
+*.qmake.stash
+*.qmake.cache
+
+# Системные файлы
+.DS_Store
+Thumbs.db
